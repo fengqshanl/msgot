@@ -17,13 +17,14 @@ fn get_analyze_by_tar(tar: &str) -> Result<(), Box<dyn std::error::Error>> {
   // 请求 html
   // html_get(tar, html_name)await;
 
-  let html = fs::read_to_string(html_name).expect("file read error");
+  // let html = fs::read_to_string(html_name).expect("file read error");
 
   // 转化数据结构
   // document_parse(&html, json_name);
 
   let json = fs::read_to_string(json_name).expect("file read error");
   let v: Value = serde_json::from_str(&json)?;
+  
   // 解析
   analyze::page::analyze(&v);
   
@@ -31,7 +32,6 @@ fn get_analyze_by_tar(tar: &str) -> Result<(), Box<dyn std::error::Error>> {
 }
 
 pub async fn msgot () -> Result<(), Box<dyn std::error::Error>> {
-
 
   let json = fs::read_to_string("config.json").unwrap();
   let config: Config = serde_json::from_str(&json)?;
