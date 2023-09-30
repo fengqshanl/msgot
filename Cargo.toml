@@ -1,0 +1,35 @@
+[package]
+name = "msgot"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+reqwest = { version = "0.11.18", features = ["json"] }
+serde = { version = "1.0.164", features = ["derive"] }
+tokio = { version = "1.28.2", features = ["full"] }
+regex = "1.8.4"
+html_parser = "0.7.0"
+serde_json = "1.0.97"
+
+html5ever = "0.26.0"
+scraper = "0.16.0"
+
+
+#[dependencies]
+#actix-web = "4"
+#actix-cors = "0.6.2"
+#config = "0.13.1"
+#deadpool-postgres = { version = "0.10.2", features = ["serde"] }
+#derive_more = "0.99.17"
+#thiserror = "1"
+#dotenv = "0.15.0"
+#serde = { version = "1.0.137", features = ["derive"] }
+#tokio-pg-mapper = "0.2.0"
+#reqwest = { version = "0.11.7", features = ["json"] }
+#tokio-pg-mapper-derive = "0.2.0"
+#tokio-postgres = { version = "0.7.6", features = ["with-uuid-1", "with-time-0_3"] }
+#postgres-types = { version = "0.2.4", features = ["derive"] }
+#openssl-sys = "0.9.75"
+#serde_json = "1.0.92"
+#uuid = { version = "1.1.2", features=["v4"] }
+#time = "0.3.0"
