@@ -1,7 +1,7 @@
 use std::fs::{File};
 use std::io::Write;
 use crate::client::reqwest::request;
-use scraper::{ Html };
+// use scraper::{ Html };
 
 pub async fn html_get(url: &str, file_name: &str) {
   let res = request(reqwest::Method::GET, url.to_owned(), "".to_string()).await.unwrap();

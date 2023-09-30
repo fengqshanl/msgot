@@ -10,7 +10,7 @@ struct Config {
     tar: Vec<String>
 }
 
-fn get_analyze_by_tar(tar: &str) {
+fn get_analyze_by_tar(tar: &str) -> Result<(), Box<dyn std::error::Error>> {
   let html_name = &format!("{}.html", tar);
   let json_name = &format!("{}.json", tar);
 
@@ -26,16 +26,18 @@ fn get_analyze_by_tar(tar: &str) {
   let v: Value = serde_json::from_str(&json)?;
   // 解析
   analyze::page::analyze(&v);
+  
+  Ok(())
 }
 
 pub async fn msgot () -> Result<(), Box<dyn std::error::Error>> {
 
 
   let json = fs::read_to_string("config.json").unwrap();
-  let config: Config = serde_json::from_reader(&json)?;
+  let config: Config = serde_json::from_str(&json)?;
 
   for va in config.tar.iter() {
-    get_analyze_by_tar(va) 
+    get_analyze_by_tar(va)? 
   }
 
   Ok(())

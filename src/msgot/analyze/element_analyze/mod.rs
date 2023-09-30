@@ -7,16 +7,16 @@ use serde_json::Value;
 
 pub fn element_analyze(element: &Value) {
   match element["name"].as_str() {
-      Sone("script") => {
+      Some("script") => {
         script::script_analyze(element);
       }
       Some("link") => {
         link::link_analyze(element);
       }
-      Sone("meta") => {
+      Some("meta") => {
         meta::meta_analyze(element);
       }
-      Sone("div") => {
+      Some("div") => {
         div::div_analyze(element);
       }
       _ => {
