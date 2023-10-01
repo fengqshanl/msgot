@@ -10,7 +10,22 @@ struct Config {
     tar: Vec<String>
 }
 
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Img {
+  pub alt: String,
+  pub url: String
+}
+
+#[derive(Debug, Serialize, Deserialize, Default)]
+pub struct Link {
+  // 子域名
+  pub subdomain: Vec<String>,
+  pub resource: Vec<String>,
+  pub img: Vec<Img>
+}
+
 fn get_analyze_by_tar(tar: &str) -> Result<(), Box<dyn std::error::Error>> {
+  let mut link: Link = Link::default();
   let html_name = &format!("{}.html", tar);
   let json_name = &format!("{}.json", tar);
 
@@ -26,8 +41,10 @@ fn get_analyze_by_tar(tar: &str) -> Result<(), Box<dyn std::error::Error>> {
   let v: Value = serde_json::from_str(&json)?;
   
   // 解析
-  analyze::page::analyze(&v);
-  
+  analyze::page::analyze(&v, &mut link);
+
+  println!("link, {:?}", link);
+
   Ok(())
 }
 
