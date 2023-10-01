@@ -1,4 +1,6 @@
 use std::fs;
+use std::io::Write;
+use serde_json::json;
 use serde_json::Value;
 // use crate::msgot::html_get::html_get;
 use crate::msgot::analyze;
@@ -22,7 +24,8 @@ pub struct Link {
   pub subdomain: Vec<BasicLink>,
   pub resource: Vec<String>,
   pub img: Vec<BasicLink>,
-  pub span: Vec<String>
+  pub span: Vec<String>,
+  pub div: Vec<String>
 }
 
 fn get_analyze_by_tar(tar: &str) -> Result<(), Box<dyn std::error::Error>> {
@@ -44,7 +47,10 @@ fn get_analyze_by_tar(tar: &str) -> Result<(), Box<dyn std::error::Error>> {
   // 解析
   analyze::page::analyze(&v, &mut link);
 
-  println!("link, {:?}", link);
+  let json = json!(link);
+
+  let mut f = fs::File::create(format!("{:?}-2.json", tar)).expect("file create error");
+  f.write_all(json.to_string().as_bytes()).expect("msg");
 
   Ok(())
 }

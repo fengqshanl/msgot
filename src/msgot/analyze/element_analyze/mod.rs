@@ -6,11 +6,9 @@ mod link;
 mod a;
 mod img;
 mod span;
+mod rest;
 use crate::msgot::msgot::Link;
 use serde_json::Value;
-
-
-
 
 pub fn element_analyze(element: &Value, link:&mut Link) {
   match element["name"].as_str() {
@@ -24,10 +22,10 @@ pub fn element_analyze(element: &Value, link:&mut Link) {
         meta::meta_analyze(element);
       }
       Some("div") => {
-        div::div_analyze(element);
+        div::div_analyze(element, link);
       }
       Some("p") => {
-        p::p_analyze(element);
+        p::p_analyze(element, link);
       }
       Some("span") => {
         span::span_analyze(element, link);
@@ -39,7 +37,7 @@ pub fn element_analyze(element: &Value, link:&mut Link) {
         img::img_analyze(element, link);
       }
       _ => {
-        // println!("none: {:?}", element)
+        rest::rest_analyze(element, link);
       }
   }
 }

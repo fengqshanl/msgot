@@ -15,5 +15,4 @@ pub fn link_analyze(link: &Value, link_collect: &mut Link) {
     }
     _ => {}
   }
-  println!("link name_list: {:?}", link);
 }
