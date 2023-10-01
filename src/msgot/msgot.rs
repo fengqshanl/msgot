@@ -11,17 +11,18 @@ struct Config {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct Img {
-  pub alt: String,
+pub struct BasicLink {
+  pub text: String,
   pub url: String
 }
 
 #[derive(Debug, Serialize, Deserialize, Default)]
 pub struct Link {
   // 子域名
-  pub subdomain: Vec<String>,
+  pub subdomain: Vec<BasicLink>,
   pub resource: Vec<String>,
-  pub img: Vec<Img>
+  pub img: Vec<BasicLink>,
+  pub span: Vec<String>
 }
 
 fn get_analyze_by_tar(tar: &str) -> Result<(), Box<dyn std::error::Error>> {

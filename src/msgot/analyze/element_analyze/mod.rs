@@ -30,7 +30,7 @@ pub fn element_analyze(element: &Value, link:&mut Link) {
         p::p_analyze(element);
       }
       Some("span") => {
-        span::span_analyze(element);
+        span::span_analyze(element, link);
       }
       Some("a") => {
         a::a_analyze(element, link);
