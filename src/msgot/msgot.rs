@@ -5,6 +5,7 @@ use serde_json::Value;
 // use crate::msgot::html_get::html_get;
 use crate::msgot::analyze;
 use serde::{Deserialize, Serialize};
+use crate::msgot::dispose::{dispose_focus, WholeConfig};
 // use crate::msgot::document_parse::document_parse;
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -47,10 +48,17 @@ fn get_analyze_by_tar(tar: &str) -> Result<(), Box<dyn std::error::Error>> {
   // 解析
   analyze::page::analyze(&v, &mut link);
 
-  let json = json!(link);
+  // 数据处理
+  dispose_focus(&link, &WholeConfig{
+    domain: tar.to_string()
+  });
 
-  let mut f = fs::File::create(format!("{:?}-2.json", tar)).expect("file create error");
-  f.write_all(json.to_string().as_bytes()).expect("msg");
+  // println!("{:?}", &link);
+
+  // let json = json!(link);
+
+  // let mut f = fs::File::create(format!("{:?}-2.json", tar)).expect("file create error");
+  // f.write_all(json.to_string().as_bytes()).expect("msg");
 
   Ok(())
 }
